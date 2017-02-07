@@ -1,0 +1,18 @@
+
+ /* Set gray background color and 100% height */
+    .sidenav {
+      padding-top: 20px;
+      background-color: #f1f1f1;
+      height: 100%;
+      min-height: 550px;
+    }
+
+     /* On small screens, set height to 'auto' for sidenav and grid */
+    @media screen and (max-width: 767px) {
+      .sidenav {
+        height: auto;
+        padding: 15px;
+        min-height: 550px;
+      }
+      .row.content {height:auto;} 
+    }
