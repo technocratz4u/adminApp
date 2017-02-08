@@ -9,12 +9,13 @@ import { Product } from './product';
 })
 export class ProductsComponent implements OnInit {
 
-selectedProduct = {};
-formShow = "hidden";
+  selectedProduct = {};
+  formShow = "hidden";
+  formAction = "";
 
-  product1: Product = new Product("RCT1","RCT 1","Ruby",1000);
-  product2: Product = new Product("RCT2","RCT 2","Ruby",7080);
-  
+  product1: Product = new Product("RCT1", "RCT 1", "Ruby", 1000);
+  product2: Product = new Product("RCT2", "RCT 2", "Ruby", 7080);
+
   productList = [this.product1, this.product2];
 
   constructor() { }
@@ -26,7 +27,8 @@ formShow = "hidden";
   editProduct(product: Product) {
     console.log("Product edited:", product);
     this.selectedProduct = product;
-    this.formShow = "show";
+    this.formAction = "Update";
+    this.showForm();
   }
 
   onSubmit(form: NgForm) {
@@ -38,8 +40,19 @@ formShow = "hidden";
     this.formShow = "hidden";
   }
 
+  showForm() {
+    this.formShow = "show";
+  }
+
   addProduct() {
-    
+    console.log("new");
+    this.selectedProduct = {};
+    this.formAction = "Save";
+    this.showForm();
+  }
+
+  deleteProduct(product: Product) {
+    console.log("Product deleted:", product);
   }
 
 }

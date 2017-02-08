@@ -4,7 +4,7 @@
 <button type="button" class="btn btn-primary" (click)="addProduct()">Add New Product</button>
 <br/><br/>
 <div class="panel panel-success" [ngClass]="formShow">
-  <div class="panel-heading"><strong>Edit Product Details</strong>
+  <div class="panel-heading"><strong>Product Details</strong>
     <button type="button" class="close" aria-label="Close" (click)="hideForm()"><span aria-hidden="true">&times;</span></button>
   </div>
   <div class="panel-body">
@@ -38,7 +38,7 @@
       </div>
       <div class="row">
         <div class="col-xs-2">
-          <button type="submit" class="btn btn-primary">Update</button>
+          <button type="submit" class="btn btn-primary">{{formAction}}</button>
         </div>
         <!--<div class="col-xs-2">
       <button type="button" class="btn btn-primary" (click)="resetForm(f)">Cancel</button>
@@ -69,7 +69,7 @@
       <td>{{product.quantity}}</td>
       <td>
         <span class="glyphicon glyphicon-pencil" aria-hidden="true" (click)="editProduct(product)"></span>
-        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+        <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)="deleteProduct(product)"></span>
       </td>
     </tr>
   </tbody>
