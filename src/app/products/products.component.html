@@ -1,44 +1,53 @@
 <h3>Manage Your Products</h3>
 <hr>
 
-<!-- Editable fields -->
-<form (ngSubmit)="onSubmit(f)" #f="ngForm" *ngIf="(selectedProduct | json) != ({} | json)">
-  <div class="row">
-    <div class="col-xs-3">
-      <div class="form-group">
-        <label for="productName">Name</label>
-        <input type="text" class="form-control" id="productName" name="productName" placeholder="Product Name" [(ngModel)]="selectedProduct.name">
-      </div>
-    </div>
-    <div class="col-xs-3">
-      <div class="form-group">
-        <label for="productDescription">Description</label>
-        <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Description" [(ngModel)]="selectedProduct.description">
-      </div>
-    </div>
-    <div class="col-xs-3">
-      <div class="form-group">
-        <label for="productType">Product Type</label>
-        <input type="text" class="form-control" id="productType" name="productType" placeholder="Product Type" [(ngModel)]="selectedProduct.type">
-      </div>
-    </div>
-    <div class="col-xs-3">
-      <div class="form-group">
-        <label for="productQuantity">Available Quantity</label>
-        <input type="number" class="form-control" id="productQuantity" name="productQuantity" placeholder="Available Quantity" [(ngModel)]="selectedProduct.quantity">
-      </div>
-    </div>
+<button type="button" class="btn btn-primary" (click)="addProduct()">Add New Product</button>
+<br/><br/>
+<div class="panel panel-success" [ngClass]="formShow">
+  <div class="panel-heading"><strong>Edit Product Details</strong>
+    <button type="button" class="close" aria-label="Close" (click)="hideForm()"><span aria-hidden="true">&times;</span></button>
   </div>
-  <div class="row">
-    <div class="col-xs-2">
-      <button type="submit" class="btn btn-primary">Update Product</button>
-    </div>
-    <!--<div class="col-xs-2">
+  <div class="panel-body">
+    <!-- Form for Editing -->
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <div class="row">
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label for="productName">Name</label>
+            <input type="text" class="form-control" id="productName" name="productName" placeholder="Product Name" [(ngModel)]="selectedProduct.name">
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label for="productDescription">Description</label>
+            <input type="text" class="form-control" id="productDescription" name="productDescription" placeholder="Description" [(ngModel)]="selectedProduct.description">
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label for="productType">Product Type</label>
+            <input type="text" class="form-control" id="productType" name="productType" placeholder="Product Type" [(ngModel)]="selectedProduct.type">
+          </div>
+        </div>
+        <div class="col-xs-3">
+          <div class="form-group">
+            <label for="productQuantity">Available Quantity</label>
+            <input type="number" class="form-control" id="productQuantity" name="productQuantity" placeholder="Available Quantity" [(ngModel)]="selectedProduct.quantity">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+        <!--<div class="col-xs-2">
       <button type="button" class="btn btn-primary" (click)="resetForm(f)">Cancel</button>
     </div>-->
+      </div>
+    </form>
+    <!-- End - Form for Editing -->
   </div>
-</form>
-
+</div>
 <br/><br/>
 
 <!-- Table -->

@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Product } from './product';
 
 @Component({
   selector: 'app-products',
@@ -8,21 +9,12 @@ import { NgForm } from '@angular/forms';
 })
 export class ProductsComponent implements OnInit {
 
-selectedProduct={};
+selectedProduct = {};
+formShow = "hidden";
 
-  product1 = {
-    name: "RCT1",
-    description: "RCT 1",
-    type: "Ruby",
-    quantity: 1000
-  };
-  product2 = {
-    name: "RCT2",
-    description: "RCT 2",
-    type: "Ruby",
-    quantity: 5500
-  };
-
+  product1: Product = new Product("RCT1","RCT 1","Ruby",1000);
+  product2: Product = new Product("RCT2","RCT 2","Ruby",7080);
+  
   productList = [this.product1, this.product2];
 
   constructor() { }
@@ -31,9 +23,10 @@ selectedProduct={};
     console.log(this.productList);
   }
 
-  editProduct(product: string) {
+  editProduct(product: Product) {
     console.log("Product edited:", product);
     this.selectedProduct = product;
+    this.formShow = "show";
   }
 
   onSubmit(form: NgForm) {
@@ -41,8 +34,12 @@ selectedProduct={};
     console.log(form.value);
   }
 
-  resetForm(form: NgForm) {
-    form.reset();
+  hideForm() {
+    this.formShow = "hidden";
+  }
+
+  addProduct() {
+    
   }
 
 }
