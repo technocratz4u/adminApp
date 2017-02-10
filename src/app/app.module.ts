@@ -13,6 +13,8 @@ import { ProductsComponent } from './products/products.component';
 import { routing } from "./app.routing";
 import { DashboardComponent } from './dashboard/dashboard.component';
 
+import {ProductService} from './services/product.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +32,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     HttpModule,
     routing
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
