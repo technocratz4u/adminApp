@@ -19,9 +19,34 @@ export class ProductService {
 
   updateProduct(product: any) {
     const body = JSON.stringify(product);
+    console.log("datasent for updating",body);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost/admin/saveProduct', body, {
+    return this.http.post('http://localhost/admin/updateProduct', body, {
+      headers: headers
+    })
+      .map((data: Response) => data)
+      .catch(this.handleError);
+  }
+
+    createProduct(product: any) {
+    const body = JSON.stringify(product);
+    console.log("datasent for inserting",body);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost/admin/createProduct', body, {
+      headers: headers
+    })
+      .map((data: Response) => data)
+      .catch(this.handleError);
+  }
+
+    deleteProduct(product: any) {
+    const body = JSON.stringify(product);
+    console.log("datasent for deletion",body);
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    return this.http.post('http://localhost/admin/deleteProduct', body, {
       headers: headers
     })
       .map((data: Response) => data.json())
@@ -29,7 +54,7 @@ export class ProductService {
   }
 
   private handleError (error: any) {
-    console.log(error);
+    console.log("error",error);
     return Observable.throw(error.json());
   }
 }

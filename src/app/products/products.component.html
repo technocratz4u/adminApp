@@ -9,6 +9,7 @@
   <div class="panel-body">
     <!-- Form for Editing -->
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+     <input type="hidden"  id="productId" name="productId" [(ngModel)]="selectedProduct.productId"/>
       <div class="row">
         <div class="col-xs-4">
           <div class="form-group">
