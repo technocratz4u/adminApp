@@ -49,7 +49,7 @@ export class ProductService {
     return this.http.post('http://localhost/admin/deleteProduct', body, {
       headers: headers
     })
-      .map((data: Response) => data.json())
+      .map((data: Response) => data)
       .catch(this.handleError);
   }
 

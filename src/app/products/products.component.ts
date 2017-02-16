@@ -56,13 +56,7 @@ productList = [{"productId":"1","productCode":"RCT-1","productName":"Ruby Cut","
       data => console.log(data),
       error => console.error(error)
     );
-  }else{
-        this.productService.deleteProduct(form.value).subscribe(
-      data => console.log(data),
-      error => console.error(error)
-    );
   }
-    console.log("Form submitted...");
   }
 
   hideForm() {
@@ -81,6 +75,10 @@ productList = [{"productId":"1","productCode":"RCT-1","productName":"Ruby Cut","
   }
 
   deleteProduct(product: Product) {
+    this.productService.deleteProduct(product).subscribe(
+      data => console.log(data),
+      error => console.error(error)
+    );
     console.log("Product deleted:", product);
   }
 
