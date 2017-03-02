@@ -17,12 +17,13 @@ export class ProductService {
       .map((response: Response) => response.json());
   }
 
-  getCategoryData() {
+  getProductMasterData(){
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.get('http://localhost/admin/populateCategories',{headers:headers})
-      .map((response: Response) => response.json());
+    return this.http.get('http://localhost/admin/populateItemMasterData',{headers:headers})
+      .map((response: Response) => response.json())
+      .catch(this.handleError);;
   }
 
   updateProduct(product: any) {

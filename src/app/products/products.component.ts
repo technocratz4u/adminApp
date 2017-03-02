@@ -19,7 +19,10 @@ hideClass = "hidden";
 formEditImageLink = "Edit Product Images";
 productList = [];
 formAction ="";
+masterdataList = [];
 categoryList = [];
+originList = [];
+treatmentList = [];
 
   //product1: Product = new Product("RCT1","RCT 1","Ruby",1000);
   //product2: Product = new Product("RCT2","RCT 2","Ruby",7080);
@@ -47,7 +50,7 @@ categoryList = [];
     console.log("Product edited:", product);
     this.selectedProduct = product;
     this.formAction = "Update";
-    this.getCategories();
+    this.getProductMasterData();
     this.showForm();
   }
 
@@ -99,12 +102,19 @@ categoryList = [];
     );
     console.log("Product deleted:", product);
   }
-
-  getCategories() {
-    this.productService.getCategoryData().subscribe(
-      data => this.categoryList = data,
+  
+  getProductMasterData(){
+    this.productService.getProductMasterData().subscribe(
+      response => {
+        this.masterdataList = response;
+        this.categoryList = this.masterdataList["category"];
+        this.originList = this.masterdataList["origin"];
+        this.treatmentList = this.masterdataList["treatment"];
+      },
       error => console.log(error)
     );
+
   }
+
 
 }

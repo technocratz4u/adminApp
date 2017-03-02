@@ -81,6 +81,26 @@
             </div>
           </div>
         </div>
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="color">Select Product Origin</label>
+            <div>
+              <select class="form-control" [(ngModel)]="selectedProduct.originId" name="originId">
+                <option *ngFor="let x of originList" [ngValue]="x.originId" >{{x.originName}}</option>
+            </select>
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="color">Select Product Treatment</label>
+            <div>
+              <select class="form-control" [(ngModel)]="selectedProduct.treatmentId" name="treatmentId">
+                <option *ngFor="let x of treatmentList" [ngValue]="x.treatmentId" >{{x.treatmentName}}</option>
+            </select>
+            </div>
+          </div>
+        </div>
       </div>
       <div [ngClass]="formImageShow">
         <div class="row">
