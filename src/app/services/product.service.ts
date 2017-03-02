@@ -17,6 +17,14 @@ export class ProductService {
       .map((response: Response) => response.json());
   }
 
+  getCategoryData() {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+
+    return this.http.get('http://localhost/admin/populateCategories',{headers:headers})
+      .map((response: Response) => response.json());
+  }
+
   updateProduct(product: any) {
     const body = JSON.stringify(product);
     console.log("datasent for updating",body);

@@ -19,6 +19,7 @@ hideClass = "hidden";
 formEditImageLink = "Edit Product Images";
 productList = [];
 formAction ="";
+categoryList = [];
 
   //product1: Product = new Product("RCT1","RCT 1","Ruby",1000);
   //product2: Product = new Product("RCT2","RCT 2","Ruby",7080);
@@ -46,6 +47,7 @@ formAction ="";
     console.log("Product edited:", product);
     this.selectedProduct = product;
     this.formAction = "Update";
+    this.getCategories();
     this.showForm();
   }
 
@@ -96,6 +98,13 @@ formAction ="";
       error => console.error(error)
     );
     console.log("Product deleted:", product);
+  }
+
+  getCategories() {
+    this.productService.getCategoryData().subscribe(
+      data => this.categoryList = data,
+      error => console.log(error)
+    );
   }
 
 }

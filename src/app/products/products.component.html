@@ -9,7 +9,7 @@
   <div class="panel-body">
     <!-- Form for Editing -->
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-     <input type="hidden"  id="productId" name="productId" [(ngModel)]="selectedProduct.productId"/>
+      <input type="hidden" id="productId" name="productId" [(ngModel)]="selectedProduct.productId" />
       <div class="row">
         <div class="col-xs-4">
           <div class="form-group">
@@ -29,8 +29,8 @@
             <input type="text" class="form-control" id="shape" name="shape" placeholder="Shape" [(ngModel)]="selectedProduct.shape">
           </div>
         </div>
-        </div>
-        <div class="row">
+      </div>
+      <div class="row">
         <div class="col-xs-4">
           <div class="form-group">
             <label for="dimensions">Dimension</label>
@@ -49,8 +49,8 @@
             <input type="text" class="form-control" id="caratWeight" name="caratWeight" placeholder="Carat Weight" [(ngModel)]="selectedProduct.caratWeight">
           </div>
         </div>
-        </div>
-        <div class="row">
+      </div>
+      <div class="row">
         <div class="col-xs-4">
           <div class="form-group">
             <label for="color">Color</label>
@@ -67,6 +67,18 @@
           <div class="form-group">
             <label for="price">Price</label>
             <input type="number" class="form-control" id="price" name="price" placeholder="Price" [(ngModel)]="selectedProduct.price">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="color">Select Category</label>
+            <div>
+              <select class="form-control" [(ngModel)]="selectedProduct.categoryId" name="categoryId">
+                <option *ngFor="let x of categoryList" [ngValue]="x.subCategoryId" >{{x.subCategoryName}}</option>
+            </select>
+            </div>
           </div>
         </div>
       </div>
@@ -121,7 +133,7 @@
       <td>{{product.quantity}}</td>
       <td>{{product.color}}</td>
       <td>{{product.meanRating}}</td>
-      <td>{{product.price}}</td>
+      <td>{{product.price | number:'.2'}} {{product.currency}}</td>
       <td>
         <span class="glyphicon glyphicon-pencil" aria-hidden="true" (click)="editProduct(product)"></span>
         <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)="deleteProduct(product)"></span>
