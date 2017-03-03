@@ -42,6 +42,8 @@ treatmentList = [];
         response => this.productList = response,
         error => console.log(error)
       );
+
+    this.getProductMasterData();
     
     console.log(this.productList);
   }
@@ -50,7 +52,6 @@ treatmentList = [];
     console.log("Product edited:", product);
     this.selectedProduct = product;
     this.formAction = "Update";
-    this.getProductMasterData();
     this.showForm();
   }
 
