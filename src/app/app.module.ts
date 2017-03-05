@@ -14,6 +14,7 @@ import { routing } from "./app.routing";
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 import {ProductService} from './services/product.service';
+import {ProductTypeService} from './services/productType.service';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,7 @@ import {ProductService} from './services/product.service';
     HttpModule,
     routing
   ],
-  providers: [ProductService],
+  providers: [ProductService,ProductTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

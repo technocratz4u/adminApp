@@ -1,3 +1,88 @@
-<p>
-  product-type works!
-</p>
+<h3>Manage Your Product Types</h3>
+<hr>
+<div class="alert fade in" [ngClass]="message.class">
+     <button type="button" class="close" aria-label="Close" (click)="message.class='hidden'"><span aria-hidden="true">&times;</span></button>
+    {{this.message.text}}
+</div>
+<button type="button" class="btn btn-primary" (click)="addProductType()">Add New Product Type</button>
+<br/><br/>
+<div class="panel panel-success" [ngClass]="formShow">
+  <div class="panel-heading"><strong>Product Type Details</strong>
+    <button type="button" class="close" aria-label="Close" (click)="hideForm()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="panel-body">
+    <!-- Form for Editing -->
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      <input type="hidden" id="subCategoryId" name="subCategoryId" [(ngModel)]="selectedProduct.subCategoryId" />
+      <div class="row">
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="categoryName">Category Name</label>
+            <div>
+              <select class="form-control" [(ngModel)]="selectedProduct.categoryId" name="categoryId">
+                <option *ngFor="let x of parentCategoryList" [ngValue]="x.categoryId" >{{x.categoryName}}</option>
+            </select>
+            </div>
+          
+          </div>
+        </div>
+        <div class="col-xs-6">
+          <div class="form-group">
+            <label for="subCategoryName">Product Type Name</label>
+            <input type="text" class="form-control" id="subCategoryName" name="subCategoryName" placeholder="Product Code" [(ngModel)]="selectedProduct.subCategoryName">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-2">
+          <button type="submit" class="btn btn-primary">{{formAction}}</button>
+        </div>
+        <!--<div class="col-xs-2">
+      <button type="button" class="btn btn-primary" (click)="resetForm(f)">Cancel</button>
+    </div>-->
+      </div>
+    </form>
+    <!-- End - Form for Editing -->
+  </div>
+</div>
+<br/><br/>
+
+<!-- Table -->
+<table class="table table-responsive table-bordered table-striped table-hover">
+  <thead>
+    <tr class="info">
+      <th>Product Category Name</th>
+      <th>Product Type Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor=" let productType of categoryList">
+      <td>{{productType.categoryName}}</td>
+      <td>{{productType.subCategoryName}}</td>
+      <td>
+        <button type="button" (click)="editProductType(productType)" class="btn btn-primary btm-sm">Edit</button>
+         <button type="button" (click)="deletedProduct=productType" class="btn btn-primary btm-sm" data-toggle="modal" data-target="#confirm-delete">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+
+</table>
+
+<div id="confirm-delete" class="modal">
+	<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+         <h3>Delete Confirmation</h3>
+       </div>
+    <div class="modal-body">
+        <p>You are about to delete.</p>
+        <p>Do you want to proceed?</p>
+    </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" (click)="deleteProductType()" class="btn btn-primary">Yes</button>
+          <button type="button" data-dismiss="modal" class="btn btn-primary">No</button>
+        </div>
+      </div>
+    </div>
+</div>

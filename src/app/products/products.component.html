@@ -1,5 +1,9 @@
 <h3>Manage Your Products</h3>
 <hr>
+<div class="alert fade in" [ngClass]="message.class">
+     <button type="button" class="close" aria-label="Close" (click)="message.class='hidden'"><span aria-hidden="true">&times;</span></button>
+    {{this.message.text}}
+</div>
 <button type="button" class="btn btn-primary" (click)="addProduct()">Add New Product</button>
 <br/><br/>
 <div class="panel panel-success" [ngClass]="formShow">
@@ -201,9 +205,26 @@
       <td>{{product.price | number:'.2'}} {{product.currency}}</td>
       <td>
         <span class="glyphicon glyphicon-pencil" aria-hidden="true" (click)="editProduct(product)"></span>
-        <span class="glyphicon glyphicon-remove" aria-hidden="true" (click)="deleteProduct(product)"></span>
+         <button type="button" (click)="deletedProduct=product" class="btn btn-primary btm-sm" data-toggle="modal" data-target="#confirm-delete">Delete</button>
       </td>
     </tr>
   </tbody>
 
 </table>
+<div id="confirm-delete" class="modal">
+	<div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+         <h3>Delete Confirmation</h3>
+       </div>
+    <div class="modal-body">
+        <p>You are about to delete.</p>
+        <p>Do you want to proceed?</p>
+    </div>
+        <div class="modal-footer">
+          <button type="button" data-dismiss="modal" (click)="deleteProduct()" class="btn btn-primary">Yes</button>
+          <button type="button" data-dismiss="modal" class="btn btn-primary">No</button>
+        </div>
+      </div>
+    </div>
+</div>

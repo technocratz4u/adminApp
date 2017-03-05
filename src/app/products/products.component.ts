@@ -23,6 +23,12 @@ masterdataList = [];
 categoryList = [];
 originList = [];
 treatmentList = [];
+deletedProduct: Product;
+
+message = {
+  class:"hidden",
+  text:""
+}
 
   //product1: Product = new Product("RCT1","RCT 1","Ruby",1000);
   //product2: Product = new Product("RCT2","RCT 2","Ruby",7080);
@@ -37,15 +43,17 @@ treatmentList = [];
 
   ngOnInit() {
 
-     this.productService.getProductData()
-      .subscribe(
-        response => this.productList = response,
-        error => console.log(error)
-      );
-
+    this.getProductList();
     this.getProductMasterData();
     
     console.log(this.productList);
+  }
+
+  getProductList(){
+       this.productService.getProductData().subscribe(
+        response => this.productList = response,
+        error => console.log(error)
+      );
   }
 
   editProduct(product: Product) {
@@ -70,13 +78,33 @@ treatmentList = [];
   onSubmit(form: NgForm) {
     if(this.formAction =="Update" ){
     this.productService.updateProduct(form.value).subscribe(
-      data => console.log(data),
-      error => console.error(error)
+      data => {
+        console.log(data);
+         this.message.class="alert-success show";
+         this.message.text="Success! Data has been successfully updated.";
+         this.getProductList();
+      },
+      error => {
+        console.error(error);
+         this.message.class="alert-dange show";
+        this.message.text="Error! Problem has occurred while updating.Please contact System Admin.";
+
+      }
     );
   }else if (this.formAction =="Save"){
     this.productService.createProduct(form.value).subscribe(
-      data => console.log(data),
-      error => console.error(error)
+      data => {
+        console.log(data);
+         this.message.class="alert-success show";
+         this.message.text="Success! Data has been successfully inserted.";
+         this.getProductList();
+      },
+      error => {
+        console.error(error);
+         this.message.class="alert-dange show";
+        this.message.text="Error! Problem has occurred while updating.Please contact System Admin.";
+
+      }
     );
   }
   }
@@ -96,10 +124,20 @@ treatmentList = [];
     this.showForm();
   }
 
+
   deleteProduct(product: Product) {
-    this.productService.deleteProduct(product).subscribe(
-      data => console.log(data),
-      error => console.error(error)
+    this.productService.deleteProduct(product).subscribe(      data => {
+        console.log(data);
+         this.message.class="alert-success show";
+         this.message.text="Success! Data has been successfully deleted.";
+         this.getProductList();
+      },
+      error => {
+        console.error(error);
+         this.message.class="alert-dange show";
+        this.message.text="Error! Problem has occurred while updating.Please contact System Admin.";
+
+      }
     );
     console.log("Product deleted:", product);
   }
