@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { ChartsModule } from 'ng2-charts/ng2-charts';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -15,6 +16,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 
 import {ProductService} from './services/product.service';
 import {ProductTypeService} from './services/productType.service';
+import {OrderService} from './services/order.service';
+import { OrdersComponent } from './orders/orders.component'
 
 @NgModule({
   declarations: [
@@ -25,15 +28,17 @@ import {ProductTypeService} from './services/productType.service';
     ProductTypeComponent,
     MainBodyComponent,
     ProductsComponent,
-    DashboardComponent
+    DashboardComponent,
+    OrdersComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    ChartsModule
   ],
-  providers: [ProductService,ProductTypeService],
+  providers: [ProductService,ProductTypeService,OrderService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

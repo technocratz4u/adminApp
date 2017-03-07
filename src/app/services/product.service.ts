@@ -23,7 +23,7 @@ export class ProductService {
 
     return this.http.get('http://localhost/admin/populateItemMasterData',{headers:headers})
       .map((response: Response) => response.json())
-      .catch(this.handleError);;
+      .catch(this.handleError);
   }
 
   updateProduct(product: any) {

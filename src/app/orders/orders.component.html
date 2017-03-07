@@ -1,0 +1,50 @@
+<br/>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="table-responsive panel panel-default">
+      <div class="panel-heading">
+        <h4>
+          Review Your Orders
+        </h4>
+      </div>
+      <!-- Table -->
+      <table class="table table-fixed table-bordered table-striped table-hover">
+        <thead>
+          <tr class="info">
+            <th>Order Id</th>
+            <th>Invoice Id</th>
+            <th>Order Amount</th>
+            <th>Order Time</th>
+            <th>Customer Name</th>
+            <th>Customer Address</th>
+            <th>Customer Contact</th>
+            <th>Change Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor=" let order of orderList">
+            <td>{{order.orderId}}</td>
+            <td>{{order.invoiceId}}</td>
+            <td>{{order.totalAmount}}</td>
+            <td>{{order.orderTime}}</td>
+            <td>{{order.fullName}}</td>
+            <td>
+              {{order.address}}, {{order.city}}, {{order.state}}, {{order.pin}}, {{order.country}}
+            </td>
+            <td>{{order.contactNumber}}</td>
+            <td>
+              <select class="form-control" name="status" [(ngModel)]="order.status">
+                <option value="CREATED">CREATED</option>
+                <option value="SHIPPED">SHIPPED</option>
+                <option value="DELIVERED">DELIVERED</option>
+              </select>
+              <button type="button" (click)="updateStatus(order)" class="btn btn-primary btm-sm" data-toggle="modal" data-target="#confirm-delete">Update</button>
+            </td>
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+  </div>
+</div>

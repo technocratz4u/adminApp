@@ -1,3 +1,15 @@
-<p>
-  dashboard works!
-</p>
+<br/>
+<div class="row">
+  <div class="col-xs-12">
+    <h5><a [routerLink]="['/orders']">Review Your Orders here</a></h5>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div style="display: block">
+      <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)"></canvas>
+    </div>
+  </div>
+</div>
