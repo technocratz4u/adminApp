@@ -1,7 +1,8 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Product } from './product';
-import {ProductService} from '../services/product.service'
+import {ProductImage} from './productImage';
+import {ProductService} from '../services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -24,10 +25,24 @@ categoryList = [];
 originList = [];
 treatmentList = [];
 deletedProduct: Product;
-
+productImage:ProductImage;
+file:File;
+frontimageUrl = "http://localhost";
+rightimageUrl = "http://localhost";
+leftimageUrl = "http://localhost";
+backimageUrl = "http://localhost";
 message = {
   class:"hidden",
   text:""
+}
+
+imageMessage = "hidden";
+editImageclass = "hidden";
+
+productImageJson = {
+  productId:'',
+  type:'',
+  imageFile:''
 }
 
   //product1: Product = new Product("RCT1","RCT 1","Ruby",1000);
@@ -43,15 +58,22 @@ message = {
 
   ngOnInit() {
 
-    this.getProductList();
-    this.getProductMasterData();
+    this.productService.getProductData().subscribe(
+        response => {this.productList = response; console.log(response);
+          
+        },
+        error => console.log(error)
+      );
+   // this.getProductMasterData();
     
     console.log(this.productList);
   }
 
   getProductList(){
        this.productService.getProductData().subscribe(
-        response => this.productList = response,
+        response => {this.productList = response; console.log(response);
+          
+        },
         error => console.log(error)
       );
   }
@@ -61,6 +83,9 @@ message = {
     this.selectedProduct = product;
     this.formAction = "Update";
     this.showForm();
+    this.editImageclass = "show";
+    this.imageMessage = "hidden";
+    console.log(this.frontimageUrl);
   }
 
   editProductImages() {
@@ -122,6 +147,8 @@ message = {
     this.selectedProduct = {};
     this.formAction = "Save";
     this.showForm();
+    this.imageMessage = "show";
+    
   }
 
 
@@ -154,6 +181,32 @@ message = {
     );
 
   }
+
+ fileChangeEvent(fileInput: any,type: any,id:any){
+      let fileList: FileList = fileInput.target.files;
+      if(fileList.length > 0){
+        this.file = fileList[0];
+      }
+        this.productImageJson.type = type;
+        this.productImageJson.productId=id;
+     }
+
+  upload(){
+          this.productService.uploadFile(this.productImageJson,this.file).subscribe(
+            response => {
+            this.getProductList();
+            this.frontimageUrl += this.selectedProduct["images"].image_url.front+'?random+\=' + Math.random();
+            this.rightimageUrl += this.selectedProduct["images"].image_url.right+'?random+\=' + Math.random();
+            this.leftimageUrl += this.selectedProduct["images"].image_url.left+'?random+\=' + Math.random();
+            this.backimageUrl += this.selectedProduct["images"].image_url.back+'?random+\=' + Math.random();
+            },
+            error => console.log(error)
+            );
+              console.log(this.productImageJson);
+  }
+
+  
+
 
 
 }

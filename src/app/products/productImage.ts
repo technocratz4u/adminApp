@@ -1,5 +1,5 @@
 export class ProductImage {
   constructor(
-    public front: string='',public back: string='',public left: string='',public right: string=''
+    public front: any='',public back: any='',public left: any='',public right: any=''
     ) {}
 }

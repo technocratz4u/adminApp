@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from "@angular/http";
+import { Http, Response, Headers,RequestOptions } from "@angular/http";
 import 'rxjs/Rx';
 import { Observable } from "rxjs/Rx";
 
@@ -64,5 +64,15 @@ export class ProductTypeService {
 
     return this.http.get('http://localhost/admin/populateParentCategories',{headers:headers})
       .map((response: Response) => response.json());
+  }
+
+  uploadFile(file :any){
+      let formData:FormData = new FormData();
+      formData.append('uploadFile', file, file.name);
+      let headers = new Headers();
+       headers.append('Accept', 'application/json');
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post("http://localhost/uploadImage", formData, options)
+            .map((response: Response) => response.json());
   }
 }

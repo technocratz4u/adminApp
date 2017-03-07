@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http, Response, Headers } from "@angular/http";
+import { Http, Response, Headers,RequestOptions } from "@angular/http";
 import 'rxjs/Rx';
 import { Observable } from "rxjs/Rx";
 
@@ -60,6 +60,22 @@ export class ProductService {
     })
       .map((data: Response) => data)
       .catch(this.handleError);
+  }
+
+
+     uploadFile(productJson :any,file:any){
+
+      let formData:FormData = new FormData();
+      formData.append('uploadFile', file,file.name);
+       formData.append('type', productJson.type);
+       formData.append('id', productJson.productId);
+      let headers = new Headers();
+       headers.append('Accept', 'application/json');
+      let options = new RequestOptions({ headers: headers });
+      console.log("image name"+formData);
+      return this.http.post("http://localhost/admin/uploadImage", formData, options)
+            .map((response: Response) => response.json())
+              .catch(this.handleError);
   }
 
   private handleError (error: any) {
