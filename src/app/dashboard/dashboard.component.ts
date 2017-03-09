@@ -9,25 +9,23 @@ import { UIChart } from 'primeng/primeng';
 })
 export class DashboardComponent implements OnInit {
   @ViewChild('chart') chart: UIChart;
-  labels = [];
-  datasets: any;
+  monthlySalesLabels = [];
+  monthlySalesDatasets= [];
   dataPoints = [];
-  data: any;
+  monthlySalesData: any;
   options: any;
 
   constructor(private dashboardService: DashboardService) {
-    this.data = {
-      labels: this.labels,
-      datasets: [{
-        label: 'Number of Orders',
-        backgroundColor: '#42A5F5',
-        borderColor: '#1E88E5',
-        data: this.dataPoints
-      }]
+    this.monthlySalesData = {
+      labels: this.monthlySalesLabels,
+      datasets: this.monthlySalesDatasets
     };
 
     this.options = {
       scales: {
+        xAxes: [{
+          stacked: true
+        }],
         yAxes: [{
           ticks: {
             beginAtZero: true
@@ -55,11 +53,17 @@ export class DashboardComponent implements OnInit {
         console.log(response);
 
         for (let entry of response) {
-          if (this.labels.indexOf(entry.monthName) === -1) {
-            this.labels.push(entry.monthName);
+          if (this.monthlySalesLabels.indexOf(entry.monthName) === -1) {
+            this.monthlySalesLabels.push(entry.monthName);
             this.dataPoints.push(+entry.orderCount);
           }
         }
+        this.monthlySalesDatasets.push({
+          label: 'Number of Orders',
+          backgroundColor: '#42A5F5',
+          borderColor: '#1E88E5',
+          data: this.dataPoints
+        });
         this.updateChart();
       },
       error => console.log(error)
