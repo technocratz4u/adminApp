@@ -27,9 +27,18 @@ export class OrdersComponent implements OnInit {
       );
   }
 
-  updateStatus(order: any){
-    this.order = order;
-    console.log(order);
+  updateOrder(order: any){
+    
+    this.orderService.updateOrder(order).subscribe(
+      data => {
+        console.log(data);         
+      },
+      error => {
+        console.error(error);
+
+      }
+    );
+
   }
 
 }
