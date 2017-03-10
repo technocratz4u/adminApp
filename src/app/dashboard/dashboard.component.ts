@@ -50,9 +50,9 @@ export class DashboardComponent implements OnInit {
   getMonthlySales() {
     this.dashboardService.getChartDetails().subscribe(
       response => {
-        console.log(response);
+        console.log(response.monthlySalesData);
 
-        for (let entry of response) {
+        for (let entry of response.monthlySalesData) {
           if (this.monthlySalesLabels.indexOf(entry.monthName) === -1) {
             this.monthlySalesLabels.push(entry.monthName);
             this.dataPoints.push(+entry.orderCount);
