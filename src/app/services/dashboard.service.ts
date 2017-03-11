@@ -18,6 +18,15 @@ export class DashboardService {
       .catch(this.handleError);
   }
 
+  getUserOrderDetails(userId:any) {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    const body = JSON.stringify(userId);
+    return this.http.post('http://localhost/admin/getUserOrders',body,{headers:headers})
+      .map((response: Response) => response.json())
+      .catch(this.handleError);
+  }
+
   private handleError (error: any) {
     console.log("error",error);
     return Observable.throw(error.json());
