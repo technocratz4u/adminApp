@@ -1,8 +1,12 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Product } from './product';
+<<<<<<< Updated upstream
 import {ProductImage} from './productImage';
 import {ProductService} from '../services/product.service';
+=======
+import {ProductService} from '../services/product.service'
+>>>>>>> Stashed changes
 
 @Component({
   selector: 'app-products',
@@ -14,6 +18,7 @@ export class ProductsComponent implements OnInit {
 
 selectedProduct = {};
 formShow = "hidden";
+<<<<<<< Updated upstream
 formImageShow = "hidden";
 showClass = "show";
 hideClass = "hidden";
@@ -65,6 +70,25 @@ productImageJson = {
         error => console.log(error)
       );
    // this.getProductMasterData();
+=======
+productList = [];
+
+  //product1: Product = new Product("RCT1","RCT 1","Ruby",1000);
+  //product2: Product = new Product("RCT2","RCT 2","Ruby",7080);
+  
+  //productList = [this.product1, this.product2];
+
+    constructor(private productService: ProductService) {}
+
+
+  ngOnInit() {
+
+      this.productService.getProductData()
+      .subscribe(
+        response => this.productList = response,
+        error => console.log(error)
+      );
+>>>>>>> Stashed changes
     
     console.log(this.productList);
   }

@@ -40,6 +40,7 @@ import { OrdersComponent } from './orders/orders.component'
     ChartModule
   ],
   providers: [ProductService,ProductTypeService,OrderService,DashboardService],
+
   bootstrap: [AppComponent]
 })
 export class AppModule { }
