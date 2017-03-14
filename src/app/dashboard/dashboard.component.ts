@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
   topfiveUserSalesDatasets= [];
   tableShow = "hidden";
   dataPoints = [];
+  dataPointsNumberOfOrders = [];
   salesDataPoints = [];
   ordersDataPoints = [];
   monthlySalesData: any;
@@ -26,6 +27,20 @@ export class DashboardComponent implements OnInit {
   userdateArr = [];
   userDataJson = {};
   ordersList = [];
+  backgroundColors= [
+                "#524f96",
+                "#a8a6dd",
+                "#c9c9cc",
+                "#5f5f6b",
+                "#166066",
+                "#e4cbf4",
+                "#5f347a",
+                "#330c4c",
+                "#dbbed9",
+                "#7c6a7b",
+                "#592d56",
+                "#d69aa8"
+            ];
 
   constructor(private dashboardService: DashboardService) {
     this.monthlySalesData = {
@@ -43,20 +58,31 @@ export class DashboardComponent implements OnInit {
     this.options = {
       scales: {
         xAxes: [{
-          stacked: true
+          stacked: false
         }],
         yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
+        id: 'Total Sales',
+        type: 'linear',
+        position: 'left',
+        scaleLabel: {
+        display: true,
+        labelString: 'Monthly Sales in USD'
+      }
+      }, {
+        id: 'Total Orders',
+        type: 'linear',
+        position: 'right',
+        ticks: {
+          beginAtZero: true
+        }, scaleLabel: {
+        display: true,
+        labelString: 'Number of Orders'
+      }
+      }]
       },
       title: {
         display: true,
-        text: 'Monthly Sales'
-      },
-      legend: {
-        position: 'bottom'
+        text: 'Monthly Sales in USD'
       }
     }
 
@@ -81,7 +107,7 @@ export class DashboardComponent implements OnInit {
           beginAtZero: true
         }, scaleLabel: {
         display: true,
-        labelString: 'Number od Orders'
+        labelString: 'Number of Orders'
       }
       }]
       },
@@ -109,15 +135,25 @@ export class DashboardComponent implements OnInit {
         for (let entry of response.monthlySalesData) {
           if (this.monthlySalesLabels.indexOf(entry.monthName) === -1) {
             this.monthlySalesLabels.push(entry.monthName);
-            this.dataPoints.push(+entry.orderCount);
+            this.dataPoints.push(+entry.totalsales);
+            this.dataPointsNumberOfOrders.push(+entry.orderCount);
           }
         }
         this.monthlySalesDatasets.push({
-          label: 'Number of Orders',
-          backgroundColor: '#42A5F5',
-          borderColor: '#1E88E5',
+          type: 'line',
+          label: 'Monthly Sales (USD)',
+          fill: false,
+          borderColor: '#4bc0c0',
           data: this.dataPoints
         });
+        this.monthlySalesDatasets.push({
+          type: 'bar',
+          label: 'Number of orders',
+          borderColor: '#d69aa8',
+          data: this.dataPointsNumberOfOrders
+        });
+        console.log(this.monthlySalesDatasets);
+        this.updateCharts();
 
         /* Top five user sales chart dataset */
 
