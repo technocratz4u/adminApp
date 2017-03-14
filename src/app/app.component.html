@@ -1,8 +1,11 @@
 <app-header>{{ title }}</app-header>
 <div class="container-fluid">
     <div class="row content">
-        <div class="col-xs-4 col-md-2 sidenav">
-            <app-sidebar></app-sidebar>
+
+        <div class="col-xs-4 col-md-2 sidenav" role="navigation">
+            <div class="sidebar-nav navbar-collapse">
+                <app-sidebar></app-sidebar>
+            </div>
         </div>
         <div class="col-xs-8 col-md-10 text-left">
             <app-mainBody></app-mainBody>

@@ -1,5 +1,18 @@
-<h5>
-  <a [routerLink]="['/']">Dashboard</a></h5>
-<h5><a [routerLink]="['/orders']">Review Orders</a></h5>  
-<h5><a [routerLink]="['/productType']">Manage Product Type</a></h5>
-<h5><a [routerLink]="['/products']">Manage Products</a></h5>
+<ul class="nav" id="side-menu">
+  <li>
+    <h5><a [routerLink]="['/']"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></h5>
+  </li>
+  <li>
+    <h5><a [routerLink]="['/orders']"><i class="fa fa-table fa-fw"></i> Review Orders</a></h5> 
+   </li>
+  <li>
+    <h5><a [routerLink]="['/productType']"><i class="fa fa-wrench fa-fw"></i> Manage Product Type<span class="fa arrow"></span></a></h5>
+  </li>
+  <li>
+     <h5><a [routerLink]="['/products']"><i class="fa fa-wrench fa-fw"></i> Manage Products<span class="fa arrow"></span></a></h5>
+  </li>
+</ul>
+
+
+ 
+
