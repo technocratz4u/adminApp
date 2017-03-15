@@ -12,7 +12,7 @@ export class DashboardComponent implements OnInit {
   @ViewChild('userchart') userchart:UIChart;
 
   monthlySalesLabels = [];
-  monthlySalesDatasets= [];
+  salesDatasets= [];
   topfiveUserLabels = [];
   topfiveUserSalesDatasets= [];
   tableShow = "hidden";
@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   dataPointsNumberOfOrders = [];
   salesDataPoints = [];
   ordersDataPoints = [];
-  monthlySalesData: any;
+  currentYearSalesData: any;
   fivetopUsersalesData: any;
   options: any;
   optionsUserchart:any;
@@ -43,9 +43,9 @@ export class DashboardComponent implements OnInit {
             ];
 
   constructor(private dashboardService: DashboardService) {
-    this.monthlySalesData = {
+    this.currentYearSalesData = {
       labels: this.monthlySalesLabels,
-      datasets: this.monthlySalesDatasets
+      datasets: this.salesDatasets
     };
 
     this.fivetopUsersalesData = {
@@ -61,23 +61,9 @@ export class DashboardComponent implements OnInit {
           stacked: false
         }],
         yAxes: [{
-        id: 'Total Sales',
-        type: 'linear',
-        position: 'left',
-        scaleLabel: {
-        display: true,
-        labelString: 'Monthly Sales in USD'
-      }
-      }, {
-        id: 'Total Orders',
-        type: 'linear',
-        position: 'right',
         ticks: {
           beginAtZero: true
-        }, scaleLabel: {
-        display: true,
-        labelString: 'Number of Orders'
-      }
+        }
       }]
       },
       title: {
@@ -129,30 +115,44 @@ export class DashboardComponent implements OnInit {
   getReportData() {
     this.dashboardService.getChartDetails().subscribe(
       response => {
-        console.log(response.monthlySalesData);
+        console.log(response.currentYearSalesData);
         console.log(response.topfiveUserSalesData)
 
-        for (let entry of response.monthlySalesData) {
+        /* Current Year Sales */
+        for (let entry of response.currentYearSalesData) {
           if (this.monthlySalesLabels.indexOf(entry.monthName) === -1) {
             this.monthlySalesLabels.push(entry.monthName);
             this.dataPoints.push(+entry.totalsales);
-            this.dataPointsNumberOfOrders.push(+entry.orderCount);
           }
         }
-        this.monthlySalesDatasets.push({
+        this.salesDatasets.push({
           type: 'line',
-          label: 'Monthly Sales (USD)',
+          label: 'Current Year Sales',
           fill: false,
-          borderColor: '#4bc0c0',
+          borderColor: '#524f96',
+          backgroundColor: '#524f96',
           data: this.dataPoints
         });
-        this.monthlySalesDatasets.push({
-          type: 'bar',
-          label: 'Number of orders',
+        this.updateCharts();
+
+        /* Last Year Sales */
+        this.monthlySalesLabels = [];
+        this.dataPoints = [];
+        for (let entry of response.lastYearSalesData) {
+          if (this.monthlySalesLabels.indexOf(entry.monthName) === -1) {
+            this.monthlySalesLabels.push(entry.monthName);
+            this.dataPoints.push(+entry.totalsales);
+          }
+        }
+        this.salesDatasets.push({
+          type: 'line',
+          label: 'Last Year Sales',
+          fill: false,
           borderColor: '#d69aa8',
-          data: this.dataPointsNumberOfOrders
+          backgroundColor: '#d69aa8',
+          data: this.dataPoints
         });
-        console.log(this.monthlySalesDatasets);
+        console.log(this.salesDatasets);
         this.updateCharts();
 
         /* Top five user sales chart dataset */
