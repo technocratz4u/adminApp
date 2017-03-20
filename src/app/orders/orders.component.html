@@ -20,6 +20,7 @@
             <th>Customer Address</th>
             <th>Customer Contact</th>
             <th>Change Status</th>
+            <th>Courier AWB Number</th>
             <th></th>
           </tr>
         </thead>
@@ -40,6 +41,9 @@
                 <option value="SHIPPED">SHIPPED</option>
                 <option value="DELIVERED">DELIVERED</option>
               </select>
+            </td>
+            <td>
+              <input type="text" class="form-control" id="awbNumber" name="awbNumber" placeholder="AWB Number" [(ngModel)]="order.awbNumber">
             </td>
             <td>
               <button type="button" (click)="updateOrder(order)" class="btn btn-primary btm-sm" data-toggle="modal" data-target="#confirm-delete">Update</button>

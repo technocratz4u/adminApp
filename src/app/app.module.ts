@@ -18,7 +18,8 @@ import {ProductService} from './services/product.service';
 import {ProductTypeService} from './services/productType.service';
 import {OrderService} from './services/order.service';
 import {DashboardService} from './services/dashboard.service';
-import { OrdersComponent } from './orders/orders.component'
+import { OrdersComponent } from './orders/orders.component';
+import { ChargesComponent } from './charges/charges.component'
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { OrdersComponent } from './orders/orders.component'
     MainBodyComponent,
     ProductsComponent,
     DashboardComponent,
-    OrdersComponent
+    OrdersComponent,
+    ChargesComponent
   ],
   imports: [
     BrowserModule,

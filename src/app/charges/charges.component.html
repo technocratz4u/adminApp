@@ -1,0 +1,20 @@
+<br/>
+<div class="panel panel-success" [ngClass]="formShow">
+  <div class="panel-heading"><strong>Configure Charges</strong>
+    <button type="button" class="close" aria-label="Close" (click)="hideForm()"><span aria-hidden="true">&times;</span></button>
+  </div>
+  <div class="panel-body">
+    <!-- Form for Editing -->
+    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
+      
+      <div class="row">
+        <div class="col-xs-4">
+          <div class="form-group">
+            <label for="productCode">VAT Charge</label>
+            <input type="text" class="form-control" id="vat" name="vat" placeholder="VAT Charge" [(ngModel)]="vatCharge">
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
