@@ -18,6 +18,7 @@ import {ProductService} from './services/product.service';
 import {ProductTypeService} from './services/productType.service';
 import {OrderService} from './services/order.service';
 import {DashboardService} from './services/dashboard.service';
+import {ChargeService} from './services/charges.service';
 import { OrdersComponent } from './orders/orders.component';
 import { ChargesComponent } from './charges/charges.component'
 
@@ -41,7 +42,7 @@ import { ChargesComponent } from './charges/charges.component'
     routing,
     ChartModule
   ],
-  providers: [ProductService,ProductTypeService,OrderService,DashboardService],
+  providers: [ProductService,ProductTypeService,OrderService,DashboardService,ChargeService],
 
   bootstrap: [AppComponent]
 })
