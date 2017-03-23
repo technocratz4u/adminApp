@@ -1,33 +1,31 @@
 <br/>
-<div class="panel panel-success" [ngClass]="formShow">
-  <div class="panel-heading"><strong>Configure Charges</strong>
-    <button type="button" class="close" aria-label="Close" (click)="hideForm()"><span aria-hidden="true">&times;</span></button>
-  </div>
-  <div class="panel-body">
-    <!-- Form for Editing -->
-    <form (ngSubmit)="onSubmit(f)" #f="ngForm">
-      
-      <div class="row">
-        <div class="col-xs-4">
-          <div class="form-group">
-            <label for="productCode">VAT Charge ({{vatChargeUnit}})</label>
-            <input type="text" class="form-control" id="vat" name="vat" placeholder="VAT Charge" [(ngModel)]="vatCharge">
-          </div>
-        </div>
-        <div class="col-xs-4">
-          <div class="form-group">
-            <label for="productCode">Shipping Charge ({{shippingChargeUnit}})</label>
-            <input type="text" class="form-control" id="shipping" name="shipping" placeholder="Shipping Charge" [(ngModel)]="shippingCharge">
-          </div>
-        </div>
+<div class="alert fade in" [ngClass]="message.class">
+     <button type="button" class="close" aria-label="Close" (click)="message.class='hidden'"><span aria-hidden="true">&times;</span></button>
+    {{this.message.text}}
+</div>
+<div class="row">
+  <div class="col-xs-6">
+    <div class="panel panel-success" [ngClass]="formShow">
+      <div class="panel-heading"><strong>Configure Charges</strong>
       </div>
+      <div class="panel-body">
+          <table class="table table-hover">
+            <tbody>
+              <tr *ngFor=" let charge of chargeList">
+                <td>{{charge.charge_type | uppercase}}</td>
+                <td>
+                  <input type="number" class="form-control" id="charge_value" name="charge_value" placeholder="Input Charge" [(ngModel)]="charge.charge_value">
+                </td>
+                <td>{{charge.charge_value_unit}}</td>
+                <td>
+                  <button type="button" (click)="onSubmit(charge)" class="btn btn-primary btm-sm">Update</button>
+                </td>
+              </tr>
+            </tbody>
 
-      <div class="row">
-        <div class="col-xs-2">
-          <button type="submit" class="btn btn-primary">Update</button>
-        </div>        
+          </table>
+
       </div>
-
-    </form>
+    </div>
   </div>
 </div>

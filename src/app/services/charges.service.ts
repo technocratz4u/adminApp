@@ -18,12 +18,11 @@ export class ChargeService {
       .catch(this.handleError);
   }
 
-  updateCharge(charges: any) {
-    const body = JSON.stringify(charges);
-    console.log("datasent for updating",body);
+  updateCharge(charge: any) {
+    const body = JSON.stringify(charge);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    return this.http.post('http://localhost/admin/updateCharges', body, {
+    return this.http.post('http://localhost/admin/updateCharge', body, {
       headers: headers
     })
       .map((data: Response) => data)
