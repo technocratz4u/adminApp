@@ -20,6 +20,7 @@ export class OrderService {
 
   updateOrder(order: any) {
     const body = JSON.stringify(order);
+    console.log(order);
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
     return this.http.post('http://localhost/admin/updateOrder', body, {
