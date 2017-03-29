@@ -8,46 +8,49 @@
           Review Your Orders
         </h4>
       </div>
+      <hr>
+      <div class="alert fade in" [ngClass]="message.class">
+        <button type="button" class="close" aria-label="Close" (click)="message.class='hidden'"><span aria-hidden="true">&times;</span></button>
+        {{this.message.text}}
+      </div>
       <!-- Table -->
       <table class="table table-fixed table-bordered table-striped table-hover">
         <thead>
           <tr class="info">
-            <th>Order Id</th>
-            <th>Invoice Id</th>
-            <th>Order Amount</th>
-            <th>Order Time</th>
-            <th>Customer Name</th>
-            <th>Customer Address</th>
-            <th>Customer Contact</th>
-            <th>Customer Email</th>
-            <th>Change Status</th>
-            <th>Courier AWB Number</th>
-            <th></th>
+            <th class="col-md-1">Order Id</th>
+            <th class="col-md-1">Invoice Id</th>
+            <th class="col-md-1">Order Amount</th>
+            <th class="col-md-1">Order Time</th>
+            <th class="col-md-1">Customer Name</th>
+            <th class="col-md-1">Customer Address</th>
+            <th class="col-md-1">Customer Contact</th>
+            <th class="col-md-2">Change Status</th>
+            <th class="col-md-2">Courier AWB Number</th>
+            <th class="col-md-1"></th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor=" let order of orderList">
-            <td>{{order.orderId}}</td>
-            <td>{{order.invoiceId}}</td>
-            <td>{{order.totalAmount}}</td>
-            <td>{{order.orderTime}}</td>
-            <td>{{order.fullName}}</td>
-            <td>
-              {{order.address}}, {{order.city}}, {{order.state}}, {{order.pin}}, {{order.country}}
+            <td class="col-md-1">{{order.orderId}}</td>
+            <td class="col-md-1">{{order.invoiceId}}</td>
+            <td class="col-md-1">{{order.totalAmount}}</td>
+            <td class="col-md-1">{{order.orderTime}}</td>
+            <td class="col-md-1">{{order.fullName}}</td>
+            <td class="col-md-1">
+              {{order.address}}, {{order.city}}, {{order.state}}, {{order.pin}}, {{order.country}} ,{{order.email}}
             </td>
-            <td>{{order.contactNumber}}</td>
-            <td>{{order.email}}</td>
-            <td>
+            <td class="col-md-1">{{order.contactNumber}}</td>
+            <td class="col-md-2">
               <select class="form-control" name="status" [(ngModel)]="order.status">
                 <option value="CREATED">CREATED</option>
                 <option value="SHIPPED">SHIPPED</option>
                 <option value="DELIVERED">DELIVERED</option>
               </select>
             </td>
-            <td>
+            <td class="col-md-2">
               <input type="text" class="form-control" id="awbNumber" name="awbNumber" placeholder="AWB Number" [(ngModel)]="order.awbNumber">
             </td>
-            <td>
+            <td class="col-md-1">
               <button type="button" (click)="updateOrder(order)" class="btn btn-primary btm-sm" data-toggle="modal" data-target="#confirm-delete">Update</button>
             </td>
           </tr>

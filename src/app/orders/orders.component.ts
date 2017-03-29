@@ -10,6 +10,10 @@ export class OrdersComponent implements OnInit {
   
   orderList = [];
   order = {};
+  message = {
+  class:"hidden",
+  text:""
+}
 
   constructor(private orderService: OrderService) { }
 
@@ -31,10 +35,16 @@ export class OrdersComponent implements OnInit {
     
     this.orderService.updateOrder(order).subscribe(
       data => {
-        console.log(data);         
+        console.log(data);  
+        console.log(data);
+         this.message.class="alert-success show";
+         this.message.text="Success! Data has been successfully updated.";     
       },
       error => {
+
         console.error(error);
+         this.message.class="alert-dange show";
+        this.message.text="Error! Problem has occurred while updating.Please contact System Admin.";
 
       }
     );
