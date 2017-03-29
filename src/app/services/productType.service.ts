@@ -13,7 +13,7 @@ export class ProductTypeService {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
 
-    return this.http.get('http://localhost/admin/populateCategories',{headers:headers})
+    return this.http.get('http://localhost/admin/populateCategory',{headers:headers})
       .map((response: Response) => response.json());
   }
 
