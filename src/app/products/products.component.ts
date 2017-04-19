@@ -64,6 +64,7 @@ productImageJson = {
         error => console.log(error)
       );
     console.log(this.productList);
+    this.getProductMasterData(); 
   }
 
   getProductList(){
